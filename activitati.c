@@ -6,10 +6,7 @@ typedef struct{
 activitate activitati[100];
 
 void select_activitati(int x[], int* nr_activitati){
-	//se selecteaza activitatile conform strategiei greedy
-	//x[i] contine numere 0:n-1
-	//x[i] = k, inseamna ca am selectat activitatea k
-	//nr_activitati se modifica
+	int n = 100 ,k = 0 , m;
 	x[0] = 0;
 	*nr_activitati = 1;
 	int n = 100 ,k = 0 , m;
