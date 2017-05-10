@@ -12,19 +12,16 @@ void select_activitati(int x[], int* nr_activitati){
 	//nr_activitati se modifica
 	x[0] = 0;
 	*nr_activitati = 1;
-	int n=100;
-	x[1]=activitati[0].f;
-	int k=1,i;
-	for(i=2;i<n;i++)
+	int n = 100 ,k = 0 , m;
+	for(m=1; m<n; m++)
     {
-        if(activitati[i].s>=x[k])
+        if(activitati[m].s>=activitati[x[k]].f)
         {
+	    k=k+1;
             *nr_activitati+=1;
-           x[i]=activitati[i].s;
-           k=i;
+           x[k]=m;
         }
     }
-return x[k];
 }
 
 void afisare(int x[], int nr){
