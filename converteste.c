@@ -32,5 +32,5 @@ int main(){
 	char ans[][100] = { "1010", "122120012020", "1351035564000", "1", "4010314414230311", "0" };
 	for (testi = 0; testi<sizeof(xs) / sizeof(long long); testi++)
 		test(testi, xs[testi], bs[testi], ans[testi]);
-	return 0;
+	return 0; 
 }
