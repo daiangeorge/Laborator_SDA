@@ -19,23 +19,25 @@ if(p<q)
 
 void merge(int *a,int p1,int q1,int p2,int q2)
 {
-    int t[50];
+    int t[50]; //vector folosit pentru merge
     int i,j,k;
     i=p1;
     j=p2;
     k=0;
-    while(i<=q1 && j<=q2)
+    while(i<=q1 && j<=q2) //cat timp indicii elementelor din ambele liste
+                          //sunt mai mici decat numarul de elemente
     {
         if(a[i]<a[j])
             t[k++]=a[i++];
         else
             t[k++]=a[j++];
     }
-    while(i<=q1)
+    while(i<=q1)    // copiere elemente ramase din prima lista
         t[k++]=a[i++];
 
-    while(j<=q2)
+    while(j<=q2)    // copiere elemente ramase din a doua lista
         t[k++]=a[j++];
+    //transferare elemente din t[] in a[]
     for(i=p1,j=0;i<=q2;i++,j++)
         a[i]=t[j];
 }
