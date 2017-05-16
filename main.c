@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+
+#define NDEBUG
+
+void merge_sort(int *a, int p, int q) {
+
+int m;
+
+if(p<q)
+    {
+    m=(p+q)/2;
+    merge_sort(a,p,m);
+    merge_sort(a,m+1,q);
+    merge(a,p,m,m+1,q);
+    }
+}
+
+void merge(int *a,int p1,int q1,int p2,int q2)
+{
+    int t[50];
+    int i,j,k;
+    i=p1;
+    j=p2;
+    k=0;
+    while(i<=q1 && j<=q2)
+    {
+        if(a[i]<a[j])
+            t[k++]=a[i++];
+        else
+            t[k++]=a[j++];
+    }
+    while(i<=q1)
+        t[k++]=a[i++];
+
+    while(j<=q2)
+        t[k++]=a[j++];
+    for(i=p1,j=0;i<=q2;i++,j++)
+        a[i]=t[j];
+}
+
+int main() {
+    int i;
+    int numbers[] = {4, 9, 3, 1, 5, 7, 8, 6, 2};
+    int expected[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    int n = (int) (sizeof(numbers) / sizeof(int));
+    merge_sort(numbers, 0, n);
+    for (i = 0; i < n; i++) {
+        printf("%d ", numbers[i]);
+    }
+    return 0;
+}
