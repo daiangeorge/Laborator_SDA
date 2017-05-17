@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int lungime_maxima(long long numar)
+{
+ int nr=0;
+ while(numar != 0)
+ {
+  nr++;
+  numar=numar/10;
+ }
+return nr;
+}
+
+long long multiplicare(long long x, long long y)
+{
+ int max,i=0;
+ int numar_divizat_x = lungime_maxima(x);
+ int numar_divizat_y = lungime_maxima(y);
+ long long multiplu,a,b,c,d,z0,z1,z2;
+  //alegem cel mai mare dintre cele 2 numere divizate
+ if( numar_divizat_x > numar_divizat_y)
+    max=numar_divizat_x;
+    else
+    max=numar_divizat_y;
+    //daca numarul divizat este prea mic atunci este mai eficient sa inmultim
+    //in metoda clasica
+    if(max<10)
+        return x*y;
+    //lungimea maxima divizata si rotunjita
+    max= (max/2) + (max%2);
+    //ne cream multiplul
+
+    multiplu=pow(10, max);
+
+
+
+    b=x/multiplu;
+    a=x-(b*multiplu);
+    d=y/multiplu;
+    c=y-(d*max);
+
+    z0=multiplicare(a,c);
+    z1=multiplicare(a+b,c+d);
+    z2=multiplicare(b,d);
+
+
+ return z0 + ((z1 - z0 - z2) * multiplu) + (z2 * (long long)(pow(10, 2 * max)));
+}
+
+int main()
+{
+    long long a = 242064;
+	long long b = 232563;
+    long long q = multiplicare(a,b);
+	printf("%ll ", multiplicare(a,b));
+
+    return 0;
+}
