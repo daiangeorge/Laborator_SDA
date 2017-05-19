@@ -4,15 +4,17 @@
 
 #define NDEBUG
 
-typedef enum {
+typedef enum
+{
     false, true
 } bool;
 
-int binary_search(int *a, int p, int q, int k) {
+int binary_search(int *a, int p, int q, int k)
+{
     int  m=(p+q)/2;
     if (p > q)
     {
-    return -1;
+        return -1;
     }
     else
     {
@@ -25,7 +27,8 @@ int binary_search(int *a, int p, int q, int k) {
 
 }
 
-int main() {
+int main()
+{
     int i,j,q,t;
     int numbers[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     int to_be_found[] = {20, 5, 7, 13};
@@ -33,32 +36,34 @@ int main() {
 
     int n = (int) (sizeof(numbers) / sizeof(int));
     int test_count = (int) (sizeof(to_be_found) / sizeof(int));
-    for (i = 0; i < test_count; i++) {
-    q=binary_search(numbers,0,n,to_be_found[i]);
-    if(q != (-1)){
-        for(j=0;j<n;j++)
-        {
-        if(numbers[j]==to_be_found[i])
-        printf("%d ",j);
-        }
-    }
-    else
+    for (i = 0; i < test_count; i++)
     {
-        if(to_be_found[i]<numbers[0])
+        q=binary_search(numbers,0,n,to_be_found[i]);
+        if(q != (-1))
         {
-        t=1;
-        while(to_be_found[i]<numbers[t] && t<n)
-            t=t+1;
-         printf("\nElementul %d ar fi pe pozitia %d \n",to_be_found[i],t);
+            for(j=0; j<n; j++)
+            {
+                if(numbers[j]==to_be_found[i])
+                    printf("%d ",j);
+            }
         }
-        else if(to_be_found[i]>numbers[0])
+        else
         {
-            t=1;
-            while(to_be_found[i]>numbers[t] && t<n)
-                t=t+1;
-         printf("\nElementul %d ar fi pe pozitia %d \n",to_be_found[i],t);
+            if(to_be_found[i]<numbers[0])
+            {
+                t=1;
+                while(to_be_found[i]<numbers[t] && t<n)
+                    t=t+1;
+                printf("\nElementul %d ar fi pe pozitia %d \n",to_be_found[i],t);
+            }
+            else if(to_be_found[i]>numbers[0])
+            {
+                t=1;
+                while(to_be_found[i]>numbers[t] && t<n)
+                    t=t+1;
+                printf("\nElementul %d ar fi pe pozitia %d \n",to_be_found[i],t);
+            }
         }
     }
-}
     return 0;
 }
