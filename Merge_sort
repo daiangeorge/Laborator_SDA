@@ -4,16 +4,17 @@
 
 #define NDEBUG
 
-void merge_sort(int *a, int p, int q) {
+void merge_sort(int *a, int p, int q)
+{
 
-int m;
+    int m;
 
-if(p<q)
+    if(p<q)
     {
-    m=(p+q)/2;
-    merge_sort(a,p,m);
-    merge_sort(a,m+1,q);
-    merge(a,p,m,m+1,q);
+        m=(p+q)/2;
+        merge_sort(a,p,m);
+        merge_sort(a,m+1,q);
+        merge(a,p,m,m+1,q);
     }
 }
 
@@ -25,7 +26,7 @@ void merge(int *a,int p1,int q1,int p2,int q2)
     j=p2;
     k=0;
     while(i<=q1 && j<=q2) //cat timp indicii elementelor din ambele liste
-                          //sunt mai mici decat numarul de elemente
+        //sunt mai mici decat numarul de elemente
     {
         if(a[i]<a[j])
             t[k++]=a[i++];
@@ -38,18 +39,20 @@ void merge(int *a,int p1,int q1,int p2,int q2)
     while(j<=q2)    // copiere elemente ramase din a doua lista
         t[k++]=a[j++];
     //transferare elemente din t[] in a[]
-    for(i=p1,j=0;i<=q2;i++,j++)
+    for(i=p1,j=0; i<=q2; i++,j++)
         a[i]=t[j];
 }
 
-int main() {
+int main()
+{
     int i;
     int numbers[] = {4, 9, 3, 1, 5, 7, 8, 6, 2};
     int expected[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
     int n = (int) (sizeof(numbers) / sizeof(int));
     merge_sort(numbers, 0, n);
-    for (i = 0; i < n; i++) {
+    for (i = 0; i < n; i++)
+    {
         printf("%d ", numbers[i]);
     }
     return 0;
