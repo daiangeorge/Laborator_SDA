@@ -7,7 +7,6 @@ int solNb;  /* solution number */
 enum { FALSE, TRUE };
 
 int conditii( int k )
-/* check the continuation conditions - the k-th queen threatens none of the queens: 1, 2, ..., k-1 */
 {
     int i;
     int valid=TRUE;
@@ -19,7 +18,7 @@ int conditii( int k )
 
 
 void displaySolution()
-/* display the chessboard configuration */
+
 {
 
     solNb++;
@@ -38,8 +37,7 @@ void displaySolution()
 }
 
 void recQueens( int k )
-/* find all possible arrangements of n queens on a chessboard such that no queen
-   threatens another */
+
 {
     int j;
     for ( j = 1; j <= n; j++ )
