@@ -1,0 +1,66 @@
+library	IEEE;
+use IEEE.STD_LOGIC_1164.all;
+
+-- Entitate:
+entity bistJK1 is
+	port (
+			J, K, R, S,CLK:  in STD_LOGIC;
+				     Q: out STD_LOGIC
+		  );
+end entity;
+
+-- Arhitectura:
+architecture comportamental of bistJK1 is
+signal M: STD_LOGIC;
+begin
+	bist: process (clk,R)
+	begin
+		if (R = '1') then 
+			M <= '0'; 
+	    elsif (S = '1') then
+			M <= '1';
+		elsif clk'event and  clk = '1' then	
+			if (J = '0') then
+				if (K = '0') then
+					null;
+				else
+					M <= '0';
+				end if;
+			else
+				if (K = '0') then
+					M <= '1';
+				else
+					M <= not(M);
+				end if;
+			end if;			
+		end if;
+		Q <= M;
+	end process;
+
+end architecture;
+
+library	IEEE;
+use IEEE.STD_LOGIC_1164.all;
+
+entity numaratorasincron is
+	port(R: in std_logic;
+	CLK: in std_logic;
+	Q: out std_logic_vector(2 downto 0)
+	);
+end;
+architecture arh of numaratorasincron is
+component bistJK1 is
+	port (
+			J, K, R, S,CLK:  in STD_LOGIC;
+				     Q: out STD_LOGIC
+		  );
+end component;
+
+signal O1,O2: std_logic;
+begin
+bist1: bistJK1 port map('1','1',R,'0',CLK,O1);
+Q(0)<=O1;
+bist2: bistJK1 port map('1','1',R,'0',O1,O2);
+Q(1)<=O2;
+bist3: bistJK1 port map('1','1',R,'0',O2,Q(2));
+end;
