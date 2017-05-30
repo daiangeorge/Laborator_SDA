@@ -1,0 +1,46 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+
+entity FIFO is 
+	port(data_in: in STD_LOGIC_VECTOR(3 downto 0);
+	data_out: out STD_LOGIC_VECTOR(3 downto 0);
+	reset,clk,we,re: in STD_LOGIC; 
+	full,empty: out STD_LOGIC);
+end entity;
+
+architecture fiiiifooo of FIFO is
+signal zempty,zfull: STD_LOGIC;
+signal write_pos: INTEGER range 0 to 3;
+
+type memorie is array(3 downto 0) of STD_LOGIC_VECTOR(3 downto 0);
+signal fif: memorie;
+begin
+	process(CLK)  
+	begin
+	if(CLK='1' and CLK'EVENT) then
+		if(reset='1') then
+			zempty<='1';
+			zfull<='0';
+			write_pos<=0;
+		elsif(RE='1' and zempty='0') then
+			data_out<=fif(0);
+			fif(2 downto 0)<=fif(3 downto 1);
+			write_pos<=write_pos-1;
+			zfull<='0';
+		if(write_pos=0) then
+			zempty<='1';
+		end if;
+		elsif(WE='1' and zfull='0') then
+			fif(write_pos)<=data_in;
+			write_pos<=write_pos+1;
+			zempty<='0';
+		if(write_pos=4) then
+			zfull<='1';
+		end if;
+	end if;
+	empty<=zempty;
+	full<=zfull;
+	end if;
+end process;
+end architecture;
+	
